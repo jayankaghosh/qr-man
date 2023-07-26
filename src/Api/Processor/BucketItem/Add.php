@@ -37,7 +37,7 @@ class Add implements ApiInterface
             'value'
         ]);
         $bucket = $this->bucketModel->load($request['bucket_id']);
-        $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'));
+        $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'))['items'];
         $allowedBucketIds = array_column($allowedBuckets, 'id');
         if (!in_array($bucket->getData('id'), $allowedBucketIds)) {
             throw new UnauthorizedException('Bucket does not belong to you');

@@ -23,10 +23,18 @@ class Listing implements ApiInterface
     public function process(array $request, Response $response): Response
     {
         $user = $this->userUtil->getLoggedInUser();
-        $buckets = $this->bucketModel->getBucketsByUserId($user->getData('id'));
-        $response->setResponseBody([
-            'buckets' => $buckets
-        ]);
+        $pageSize = $_GET['pageSize'] ?? 10;
+        $currentPage = $_GET['currentPage'] ?? 1;
+        $sortField = $_GET['sortField'] ?? 'id';
+        $sortDirection = $_GET['sortDirection'] ?? 'DESC';
+        $data = $this->bucketModel->getBucketsByUserId(
+            $user->getData('id'),
+            $pageSize,
+            $currentPage,
+            $sortField,
+            $sortDirection
+        );
+        $response->setResponseBody($data);
         return $response;
     }
 }

@@ -27,12 +27,38 @@ class Bucket extends AbstractModel
         return 'id';
     }
 
-    public function getBucketsByUserId(int $userId)
+    public function getBucketsByUserId(
+        int $userId,
+        int $pageSize = null,
+        int $currentPage = null,
+        string $sortField = null,
+        string $sortDirection = null
+    )
     {
-        $ownedBuckets = $this->getConnector()->query('SELECT * FROM '.$this->getTableName().' WHERE owner_id=%s', [$userId]);
+        $query = "SELECT * FROM " . $this->getTableName() . " WHERE owner_id=%s";
+        if ($sortField && $sortDirection) {
+            $query .= " ORDER BY $sortField $sortDirection";
+        }
+        if ($pageSize && $currentPage) {
+            $limit = $pageSize;
+            $offset = $pageSize*($currentPage-1);
+            $query .= " LIMIT $offset,$limit";
+        }
+        $ownedBuckets = $this->getConnector()->query(
+            $query,
+            [$userId]
+        );
         $sharedBuckets = [];
-        $buckets = array_merge($ownedBuckets, $sharedBuckets);
-        return $buckets;
+        $items = array_merge($ownedBuckets, $sharedBuckets);
+        $totalCount = $this->getConnector()->query(
+            "SELECT COUNT(*) FROM ".$this->getTableName()." WHERE owner_id=%s",
+            [$userId],
+            Connector::QUERY_TYPE_FIRST_FIELD
+        );
+        return [
+            'items' => $items,
+            'total_count' => $totalCount
+        ];
     }
 
     public function save(DataObject $model)

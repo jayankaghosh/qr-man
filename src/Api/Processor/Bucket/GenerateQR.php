@@ -32,7 +32,7 @@ class GenerateQR implements ApiInterface
         $this->requestUtil->validateRequiredFields($_GET, ['bucket_id']);
         $user = $this->userUtil->getLoggedInUser();
         $bucket = $this->bucketModel->load($_GET['bucket_id']);
-        $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'));
+        $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'))['items'];
         $allowedBucketIds = array_column($allowedBuckets, 'id');
         if (!in_array($bucket->getData('id'), $allowedBucketIds)) {
             throw new UnauthorizedException('Bucket does not belong to you');

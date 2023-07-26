@@ -32,7 +32,7 @@ class GetByCode implements ApiInterface
         $this->requestUtil->validateRequiredFields($_GET, ['code']);
         $user = $this->userUtil->getLoggedInUser();
         $bucket = $this->bucketModel->load($_GET['code'], 'code');
-        $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'));
+        $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'))['items'];
         $allowedBucketCodes = array_column($allowedBuckets, 'code');
         if (!in_array($bucket->getData('code'), $allowedBucketCodes)) {
             throw new UnauthorizedException('Bucket does not belong to you');

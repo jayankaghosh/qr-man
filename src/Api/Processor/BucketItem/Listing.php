@@ -30,15 +30,23 @@ class Listing implements ApiInterface
         $user = $this->userUtil->getLoggedInUser();
         $this->requestUtil->validateRequiredFields($_GET, ['bucket_id']);
         $bucket = $this->bucketModel->load($_GET['bucket_id']);
-        $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'));
+        $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'))['items'];
         $allowedBucketIds = array_column($allowedBuckets, 'id');
         if (!in_array($bucket->getData('id'), $allowedBucketIds)) {
             throw new UnauthorizedException('Bucket does not belong to you');
         }
-        $items = $this->bucketItemModel->getItemsByBucketId($bucket->getData('id'));
-        $response->setResponseBody([
-            'items' => $items
-        ]);
+        $pageSize = $_GET['pageSize'] ?? 10;
+        $currentPage = $_GET['currentPage'] ?? 1;
+        $sortField = $_GET['sortField'] ?? 'id';
+        $sortDirection = $_GET['sortDirection'] ?? 'DESC';
+        $data = $this->bucketItemModel->getItemsByBucketId(
+            $bucket->getData('id'),
+            $pageSize,
+            $currentPage,
+            $sortField,
+            $sortDirection
+        );
+        $response->setResponseBody($data);
         return $response;
     }
 }

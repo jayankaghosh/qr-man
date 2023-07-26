@@ -2,6 +2,8 @@
 
 namespace QrMan\Model;
 
+use QrMan\Db\Connector;
+
 class BucketItem extends AbstractModel
 {
 
@@ -18,9 +20,33 @@ class BucketItem extends AbstractModel
         return 'id';
     }
 
-    public function getItemsByBucketId(int $bucketId): array
+    public function getItemsByBucketId(
+        int $bucketId,
+        int $pageSize = null,
+        int $currentPage = null,
+        string $sortField = null,
+        string $sortDirection = null
+    ): array
     {
-        return $this->getConnector()->query('SELECT * FROM '.$this->getTableName().' WHERE bucket_id=%s', [$bucketId]);
+        $query = 'SELECT * FROM '.$this->getTableName().' WHERE bucket_id=%s';
+        if ($sortField && $sortDirection) {
+            $query .= " ORDER BY $sortField $sortDirection";
+        }
+        if ($pageSize && $currentPage) {
+            $limit = $pageSize;
+            $offset = $pageSize*($currentPage-1);
+            $query .= " LIMIT $offset,$limit";
+        }
+        $items = $this->getConnector()->query($query, [$bucketId]);
+        $totalCount = $this->getConnector()->query(
+            "SELECT COUNT(*) FROM ".$this->getTableName()." WHERE bucket_id=%s",
+            [$bucketId],
+            Connector::QUERY_TYPE_FIRST_FIELD
+        );
+        return [
+            'items' => $items,
+            'total_count' => $totalCount
+        ];
     }
 
     public function validateType(int $type): bool
