@@ -1,0 +1,26 @@
+{
+    "name": "jayankaghosh/qrman",
+    "description": "QR Manager",
+    "type": "project",
+    "require": {
+        "sergeytsalkov/meekrodb": "^2.4",
+        "jayankaghosh/om": "1.1.1",
+        "jayankaghosh/dataobject": "dev-master",
+        "vlucas/phpdotenv": "5.5.x-dev",
+        "chillerlan/php-qrcode": "dev-main",
+        "greenlion/php-sql-parser": "dev-master",
+        "ext-gd": "*"
+    },
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Jayanka Ghosh",
+            "email": "jayankaghosh@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "QrMan\\": "src/"
+        }
+    }
+}
