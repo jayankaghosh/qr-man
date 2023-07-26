@@ -44,7 +44,7 @@ abstract class AbstractModel
         return $this->connector;
     }
 
-    public function save(DataObject $model)
+    public function save(DataObject $model): DataObject
     {
         $columns = array_column($this->describe(), 'Field');
         $data = [];
@@ -56,7 +56,7 @@ abstract class AbstractModel
         $id = $this->connector->insert($this->getTableName(), $data, $this->getIdField());
         $newModel = $this->load($id);
         $model->addData($newModel->getData());
-        return $model;
+        return $newModel;
     }
 
     public function delete(DataObject $model)

@@ -37,6 +37,11 @@ return [
         'processor' => \QrMan\Api\Processor\Bucket\Delete::class
     ],
     [
+        'uri' => '/bucket/edit',
+        'method' => 'POST',
+        'processor' => \QrMan\Api\Processor\Bucket\Edit::class
+    ],
+    [
         'uri' => '/bucket/generateQR',
         'method' => 'GET',
         'processor' => \QrMan\Api\Processor\Bucket\GenerateQR::class
@@ -60,5 +65,10 @@ return [
         'uri' => '/bucket/item/delete',
         'method' => 'POST',
         'processor' => \QrMan\Api\Processor\BucketItem\Delete::class
+    ],
+    [
+        'uri' => '/bucket/item/edit',
+        'method' => 'POST',
+        'processor' => \QrMan\Api\Processor\BucketItem\Edit::class
     ],
 ];

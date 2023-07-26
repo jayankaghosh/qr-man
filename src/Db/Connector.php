@@ -49,6 +49,10 @@ class Connector
         $updateData = $insertData;
         unset($updateData[$idField]);
         $this->Db::insertUpdate($table, $insertData, $updateData);
-        return $this->Db::insertId();
+        $id = $this->Db::insertId();
+        if (!$id) {
+            $id = $data[$idField];
+        }
+        return $id;
     }
 }

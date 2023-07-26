@@ -61,7 +61,7 @@ class Bucket extends AbstractModel
         ];
     }
 
-    public function save(DataObject $model)
+    public function save(DataObject $model): DataObject
     {
         if (!$model->getData('id')) {
             while (true) {
