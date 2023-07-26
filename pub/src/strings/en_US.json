@@ -1,0 +1,12 @@
+{
+  "app": {
+    "name": "QRMan"
+  },
+  "menu": {
+    "profile": "My Profile",
+    "logout": "Logout"
+  },
+  "bucket": {
+    "no-bucket-found": "No buckets found"
+  }
+}
