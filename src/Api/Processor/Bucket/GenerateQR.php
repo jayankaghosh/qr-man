@@ -35,7 +35,7 @@ class GenerateQR implements ApiInterface
         $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'))['items'];
         $allowedBucketIds = array_column($allowedBuckets, 'id');
         if (!in_array($bucket->getData('id'), $allowedBucketIds)) {
-            throw new UnauthorizedException('Bucket does not belong to you');
+            throw new UnauthorizedException(__('Bucket does not belong to you'));
         }
         $this->generateRawQRImage(
             $bucket->getData('code'),

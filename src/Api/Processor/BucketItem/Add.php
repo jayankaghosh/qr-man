@@ -40,10 +40,10 @@ class Add implements ApiInterface
         $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'))['items'];
         $allowedBucketIds = array_column($allowedBuckets, 'id');
         if (!in_array($bucket->getData('id'), $allowedBucketIds)) {
-            throw new UnauthorizedException('Bucket does not belong to you');
+            throw new UnauthorizedException(__('Bucket does not belong to you'));
         }
         if (!$this->bucketItemModel->validateType($request['type'])) {
-            throw new MalformedDataException('Invalid type');
+            throw new MalformedDataException(__('Invalid type'));
         }
         $model = new DataObject([
             'bucket_id' => $bucket->getData('id'),

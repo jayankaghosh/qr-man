@@ -36,7 +36,7 @@ class Delete implements ApiInterface
         $bucketItem = $this->bucketItemModel->load($bucketItemId);
         $bucket = $this->bucketModel->load((string)$bucketItem->getData('bucket_id'));
         if ($bucket->getData('owner_id') != $user->getData('id')) {
-            throw new UnauthorizedException('Bucket does not belong to you');
+            throw new UnauthorizedException(__('Bucket does not belong to you'));
         }
         $this->bucketItemModel->delete($bucketItem);
         $response->setResponseBody([

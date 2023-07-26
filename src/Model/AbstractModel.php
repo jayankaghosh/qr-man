@@ -53,7 +53,7 @@ abstract class AbstractModel
                 $data[$column] = $model->getData($column);
             }
         }
-        $id = $this->connector->insert($this->getTableName(), $data);
+        $id = $this->connector->insert($this->getTableName(), $data, $this->getIdField());
         $newModel = $this->load($id);
         $model->addData($newModel->getData());
         return $model;

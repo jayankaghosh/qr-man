@@ -31,7 +31,7 @@ class Processor
                 }
             }
             if (!$processor) {
-                throw new NotFoundException('Processor not found');
+                throw new NotFoundException(__('Processor not found'));
             }
             $processor = ObjectManager::getInstance()->get($processor);
             if ($processor instanceof ApiInterface) {
@@ -59,7 +59,7 @@ class Processor
             $json = file_get_contents('php://input');
             $data = json_decode($json, true);
             if (!$data) {
-                throw new MalformedDataException('Malformed JSON POST data');
+                throw new MalformedDataException(__('Malformed JSON POST data'));
             }
         } else {
             $data = [];

@@ -40,12 +40,15 @@ class Connector
         return $this->Db::{$queryType}($sql, ...$variables);
     }
 
-    public function insert(string $table, array $data)
+    public function insert(string $table, array $data, string $idField)
     {
         if ($this->doSetup) {
             $this->setup->setupTable($table);
         }
-        $this->Db::insert($table, $data);
+        $insertData = $data;
+        $updateData = $insertData;
+        unset($updateData[$idField]);
+        $this->Db::insertUpdate($table, $insertData, $updateData);
         return $this->Db::insertId();
     }
 }

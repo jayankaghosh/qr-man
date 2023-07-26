@@ -33,7 +33,7 @@ class Delete implements ApiInterface
         $bucketId = (int)$request['bucket_id'];
         $model = $this->bucketModel->load($bucketId);
         if ($model->getData('owner_id') != $user->getData('id')) {
-            throw new UnauthorizedException('Bucket does not belong to you');
+            throw new UnauthorizedException(__('Bucket does not belong to you'));
         }
         $this->bucketModel->delete($model);
         $response->setResponseBody([

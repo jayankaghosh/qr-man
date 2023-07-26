@@ -17,6 +17,11 @@ return [
         'processor' => \QrMan\Api\Processor\User\Details::class
     ],
     [
+        'uri' => '/user/edit',
+        'method' => 'POST',
+        'processor' => \QrMan\Api\Processor\User\Edit::class
+    ],
+    [
         'uri' => '/bucket/list',
         'method' => 'GET',
         'processor' => \QrMan\Api\Processor\Bucket\Listing::class

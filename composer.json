@@ -9,7 +9,9 @@
         "vlucas/phpdotenv": "5.5.x-dev",
         "chillerlan/php-qrcode": "dev-main",
         "greenlion/php-sql-parser": "dev-master",
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "symfony/translation": "6.4.x-dev",
+        "symfony/console": "6.4.x-dev"
     },
     "minimum-stability": "dev",
     "authors": [

@@ -24,6 +24,6 @@ class User
                 return $user;
             }
         }
-        throw new UnauthorizedException('User is not logged in');
+        throw new UnauthorizedException(__('User is not logged in'));
     }
 }

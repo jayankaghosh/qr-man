@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 $objectManagerFactory = new \Om\OmFactory(
@@ -16,4 +13,11 @@ $app = $objectManager->create(\QrMan\App::class, [
     'rootDirectory' => __DIR__,
     'server' => $_SERVER
 ]);
-$app->run();
+
+if (php_sapi_name() == "cli") {
+    $appType = \QrMan\App::APP_TYPE_CLI;
+} else {
+    $appType = \QrMan\App::APP_TYPE_WEB;
+}
+
+$app->run($appType);

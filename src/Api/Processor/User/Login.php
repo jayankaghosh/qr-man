@@ -38,11 +38,11 @@ class Login implements ApiInterface
 
         $model = $this->userModel->load($email, 'email');
         if (!$model->getData('id')) {
-            throw new UnauthorizedException('Invalid email or password');
+            throw new UnauthorizedException(__('Invalid email or password'));
         }
         $isValid = $this->encryption->validate($password, $model->getData('password_hash') ?? '');
         if (!$isValid) {
-            throw new UnauthorizedException('Invalid email or password');
+            throw new UnauthorizedException(__('Invalid email or password'));
         }
         $response->setResponseBody([
             'token' => $this->userTokenModel->generateToken($model->getData('id'))

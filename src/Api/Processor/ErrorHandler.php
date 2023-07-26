@@ -24,7 +24,7 @@ class ErrorHandler implements ApiInterface
         if ($throwable instanceof ClientAwareInterface || $this->mode->isDevMode()) {
             $responseData['error'] = $throwable->getMessage();
         } else {
-            $responseData['error'] = 'Error processing endpoint';
+            $responseData['error'] = __('Error processing endpoint');
         }
         if ($this->mode->isDevMode()) {
             $responseData['trace'] = $throwable->getTraceAsString();
