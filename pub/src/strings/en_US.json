@@ -8,5 +8,20 @@
   },
   "bucket": {
     "no-bucket-found": "No buckets found"
+  },
+  "authenticate": {
+    "sign-in": "Sign in",
+    "email-address": "Email Address",
+    "password": "Password",
+    "forgot-password": "Forgot Password?",
+    "sign-up-link": "Don't have an account? Sign Up",
+    "sign-up": "Sign up",
+    "sign-in-link": "Already have an account? Sign In",
+    "full-name": "Full name"
+  },
+  "no-route": {
+    "heading": "404",
+    "message": "The page you’re looking for doesn’t exist.",
+    "home-button-text": "Take me back"
   }
 }

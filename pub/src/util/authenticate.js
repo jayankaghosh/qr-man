@@ -1,6 +1,11 @@
-import { redirect } from "react-router-dom";
-import { getItem } from "util/browser-database";
+import { getItem, setItem } from "util/browser-database";
 
-export const initiateAuthentication = () => {
+const TOKEN_KEY = 'authToken';
 
+export const getAuthenticationToken = () => {
+    return getItem(TOKEN_KEY);
+}
+
+export const setAuthenticationToken = token => {
+    setItem(TOKEN_KEY, token)
 }

@@ -6,9 +6,12 @@ import i18next from "i18next";
 import { getMode } from 'util/mode';
 import { routes } from "pages/router";
 import { getResourcesJson, getCurrentLocale } from "util/i18n";
+import {Provider} from "react-redux";
+import Loader from "components/loader";
+import Toast from "components/toast";
+import store from "util/store";
 
 import './App.scss';
-
 const theme = createTheme({
     palette: {
         mode: getMode(),
@@ -27,11 +30,15 @@ function App() {
             <div className="QrMan">
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
-                    <BrowserRouter>
-                        <Routes>
-                            { routes }
-                        </Routes>
-                    </BrowserRouter>
+                    <Provider store={store}>
+                        <Loader />
+                        <Toast />
+                        <BrowserRouter>
+                            <Routes>
+                                { routes }
+                            </Routes>
+                        </BrowserRouter>
+                    </Provider>
                 </ThemeProvider>
             </div>
         </I18nextProvider>

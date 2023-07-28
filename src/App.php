@@ -45,11 +45,21 @@ class App
         if ($appType === self::APP_TYPE_CLI) {
             $this->cliProcessor->process();
         } else {
-            $requestUri = strtok($this->server['REQUEST_URI'], '?');
-            $requestUri = rtrim($requestUri, '/');
+            $requestUri = $this->getRequestUri();
             $method = $_SERVER['REQUEST_METHOD'] ?? null;
             $this->apiProcessor->process($requestUri, $method);
         }
+    }
+
+    protected function getRequestUri(): string
+    {
+        $apiPrefix = $_ENV['API_PREFIX'] ?? '';
+        $requestUri = strtok($this->server['REQUEST_URI'], '?');
+        $requestUri = rtrim($requestUri, '/');
+        if (str_starts_with($requestUri, $apiPrefix)) {
+            $requestUri = substr($requestUri, strlen($apiPrefix));
+        }
+        return $requestUri;
     }
 
     protected function loadEnvironmentVariables(string $directory): void

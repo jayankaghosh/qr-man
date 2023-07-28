@@ -8,7 +8,7 @@ const MenuItems = () => {
     const { t } = useTranslation('common');
     return (
         <Box
-            sx={{width: 250}}
+            sx={{width: 300}}
             role="presentation"
         >
             <List>

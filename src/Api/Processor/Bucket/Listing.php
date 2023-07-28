@@ -23,7 +23,11 @@ class Listing implements ApiInterface
     public function process(array $request, Response $response): Response
     {
         $user = $this->userUtil->getLoggedInUser();
-        $pageSize = $_GET['pageSize'] ?? 10;
+        if (array_key_exists('pageSize', $_GET)) {
+            $pageSize = $_GET['pageSize'] ?? 10;
+        } else {
+            $pageSize = null;
+        }
         $currentPage = $_GET['currentPage'] ?? 1;
         $sortField = $_GET['sortField'] ?? 'id';
         $sortDirection = $_GET['sortDirection'] ?? 'DESC';

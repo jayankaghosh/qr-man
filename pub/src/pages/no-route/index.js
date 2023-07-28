@@ -1,7 +1,9 @@
 import { Box, Button, Typography } from '@mui/material'
 import Link from 'components/link';
+import {useTranslation} from "react-i18next";
 
 const NoRoute = () => {
+    const { t } = useTranslation('common');
     return (
         <div className={'NoRoute'}>
             <Box
@@ -14,13 +16,13 @@ const NoRoute = () => {
                 }}
             >
                 <Typography variant="h1">
-                    404
+                    {t('no-route.heading')}
                 </Typography>
                 <Typography variant="h6">
-                    The page you’re looking for doesn’t exist.
+                    {t('no-route.message')}
                 </Typography>
                 <Box sx={{ m: 2 }} />
-                <Link to={'/'}>Take me back</Link>
+                <Link to={'/'}>{t('no-route.home-button-text')}</Link>
             </Box>
         </div>
     )
