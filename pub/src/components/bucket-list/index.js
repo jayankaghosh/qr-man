@@ -1,10 +1,9 @@
 import {useTranslation} from "react-i18next";
 import {Box, Card, Typography, CardContent, CardActions, Button, Divider} from "@mui/material";
-import {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
 import {sendRequest} from "util/request";
+import ItemList from "components/item-list";
 
-const Bucket = ({ data }) => {
+const Item = ({ data }) => {
     return (
         <>
             <Card>
@@ -26,16 +25,7 @@ const Bucket = ({ data }) => {
     )
 }
 
-const Buckets = ({ items }) => {
-    const { t } = useTranslation('common');
-    return (
-        <div>
-            { items.map((item, index) => <Bucket key={index} data={item} />) }
-        </div>
-    )
-}
-
-const NoBuckets = () => {
+const NoItems = () => {
     const { t } = useTranslation('common');
     return (
         <Box
@@ -54,34 +44,42 @@ const NoBuckets = () => {
     );
 }
 
-const renderBucketList = (items) => {
-    if (!items) {
-        return null;
-    } else if (items.length) {
-        return <Buckets items={items} />;
-    } else {
-        return <NoBuckets />
-    }
+const fetchItems = (
+    dispatch,
+    items,
+    setItems,
+    setHasMorePages,
+    currentPage = 1,
+    pageSize = 10
+) => {
+    (async () => {
+        if (!items) {
+            items = [];
+        }
+        dispatch({type: 'LOADER_ENABLE'});
+        try {
+            const params = new URLSearchParams({
+                pageSize,
+                currentPage,
+                sortField: 'created_at',
+                sortDirection: 'DESC'
+            });
+            const response = await sendRequest(`/bucket/list?${params.toString()}`, 'GET')
+            const totalPages = Math.ceil(response.total_count/pageSize);
+            setItems([ ...items, ...response.items])
+            setHasMorePages(currentPage < totalPages);
+            dispatch({type: 'LOADER_DISABLE'});
+        } catch {}
+    })();
 }
-
 const BucketList = () => {
-    const [items, setItems] = useState(null);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        (async () => {
-            dispatch({type: 'LOADER_ENABLE'});
-            try {
-                const response = await sendRequest('/bucket/list', 'GET')
-                setItems(response.items)
-                dispatch({type: 'LOADER_DISABLE'});
-            } catch {
-
-            }
-        })();
-    }, [])
     return (
         <div className={'BucketList'}>
-            { renderBucketList(items) }
+            <ItemList
+                fetchItems={fetchItems}
+                noItemsFoundComponent={NoItems}
+                itemRenderer={Item}
+            />
         </div>
     )
 }

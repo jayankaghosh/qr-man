@@ -2,9 +2,11 @@ import {Box, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton}
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useTranslation } from "react-i18next";
-
+import {logout} from "util/authenticate";
+import {useNavigate} from "react-router-dom";
 
 const MenuItems = () => {
+    const navigate = useNavigate();
     const { t } = useTranslation('common');
     return (
         <Box
@@ -13,7 +15,7 @@ const MenuItems = () => {
         >
             <List>
                 <ListItem disablePadding>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => navigate('/profile')}>
                         <ListItemIcon>
                             <AccountCircleIcon />
                         </ListItemIcon>
@@ -21,7 +23,7 @@ const MenuItems = () => {
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton>
+                    <ListItemButton onClick={logout}>
                         <ListItemIcon>
                             <LogoutIcon />
                         </ListItemIcon>

@@ -9,3 +9,8 @@ export const getAuthenticationToken = () => {
 export const setAuthenticationToken = token => {
     setItem(TOKEN_KEY, token)
 }
+
+export const logout = () => {
+    setAuthenticationToken(null);
+    window.location.href = '/authenticate';
+}
