@@ -1,6 +1,5 @@
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {CircularProgress} from "@mui/material";
 
@@ -52,7 +51,6 @@ const renderList = (items, incrementPage, hasMorePages, refreshList, NoItems, it
 }
 
 const ItemList = ({ fetchItems, noItemsFoundComponent, itemRenderer }) => {
-    const dispatch = useDispatch();
     const pageSize = 10;
     const [items, setItems] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +71,7 @@ const ItemList = ({ fetchItems, noItemsFoundComponent, itemRenderer }) => {
     useEffect(() => {
         if (fetchItemsState === true) {
             setFetchItemsState(false);
-            fetchItems(dispatch, items, setItems, setHasMorePages, currentPage, pageSize);
+            fetchItems(items, setItems, setHasMorePages, currentPage, pageSize);
         }
     }, [fetchItemsState]);
     return (

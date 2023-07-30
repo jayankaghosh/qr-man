@@ -1,6 +1,7 @@
 import SignIn from "components/sign-in";
 import SignUp from "components/sign-up";
 import {useState} from "react";
+import EmptyLayout from 'layouts/empty';
 import {STEP_SIGN_IN, STEP_SIGN_UP} from "pages/authenticate/config";
 
 const renderComponent = (currentStep, setCurrentStep) => {
@@ -14,9 +15,11 @@ const renderComponent = (currentStep, setCurrentStep) => {
 const Authenticate = () => {
     const [currentStep, setCurrentStep] = useState(STEP_SIGN_IN);
     return (
-        <div className={'Authenticate'}>
-            { renderComponent(currentStep, setCurrentStep) }
-        </div>
+        <EmptyLayout>
+            <div className={'Authenticate'}>
+                { renderComponent(currentStep, setCurrentStep) }
+            </div>
+        </EmptyLayout>
     )
 }
 

@@ -3,21 +3,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {useTranslation} from "react-i18next";
 import Link from "components/link";
 import {STEP_SIGN_UP} from "pages/authenticate/config";
-import {sendRequest} from "util/request";
-import {setAuthenticationToken} from "util/authenticate";
-
-const onSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    try {
-        const { token } = await sendRequest('/user/login', 'POST', data);
-        setAuthenticationToken(token)
-        window.location.href = '/';
-    } catch (error) {
-        console.log(error);
-    }
-}
+import {FORM_TYPE_LOGIN, onFormSubmit} from "util/authenticate";
 
 const SignIn = ({ setCurrentStep }) => {
     const { t } = useTranslation('common');
@@ -37,7 +23,7 @@ const SignIn = ({ setCurrentStep }) => {
             <Typography component="h1" variant="h5">
                 { t('authenticate.sign-in') }
             </Typography>
-            <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={e => onFormSubmit(e, FORM_TYPE_LOGIN)} noValidate sx={{ mt: 1 }}>
                 <TextField
                     margin="normal"
                     required

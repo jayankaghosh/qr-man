@@ -2,6 +2,7 @@ import {useTranslation} from "react-i18next";
 import {Box, Card, Typography, CardContent, CardActions, Button, Divider} from "@mui/material";
 import {sendRequest} from "util/request";
 import ItemList from "components/item-list";
+import {useDispatch} from "react-redux";
 
 const Item = ({ data }) => {
     return (
@@ -73,10 +74,11 @@ const fetchItems = (
     })();
 }
 const BucketList = () => {
+    const dispatch = useDispatch();
     return (
         <div className={'BucketList'}>
             <ItemList
-                fetchItems={fetchItems}
+                fetchItems={(...args) => fetchItems(dispatch, ...args)}
                 noItemsFoundComponent={NoItems}
                 itemRenderer={Item}
             />

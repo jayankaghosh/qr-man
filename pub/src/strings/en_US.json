@@ -3,6 +3,7 @@
     "name": "QRMan"
   },
   "menu": {
+    "my-buckets": "My Buckets",
     "profile": "My Profile",
     "logout": "Logout"
   },
@@ -17,7 +18,9 @@
     "sign-up-link": "Don't have an account? Sign Up",
     "sign-up": "Sign up",
     "sign-in-link": "Already have an account? Sign In",
-    "full-name": "Full name"
+    "full-name": "Full name",
+    "my-profile": "My profile",
+    "member-since": "Member Since"
   },
   "no-route": {
     "heading": "404",

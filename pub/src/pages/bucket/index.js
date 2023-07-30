@@ -1,7 +1,7 @@
 import {Fab} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import Header from "components/header";
 import BucketList from "components/bucket-list";
+import WithHeaderLayout from 'layouts/with-header';
 
 const AddButton = () => {
     const styles = {
@@ -18,11 +18,12 @@ const AddButton = () => {
 
 const BucketPage = () => {
     return (
-        <div className={'BucketPage'}>
-            <Header />
-            <BucketList />
-            <AddButton />
-        </div>
+        <WithHeaderLayout>
+            <div className={'BucketPage'}>
+                <BucketList />
+                <AddButton />
+            </div>
+        </WithHeaderLayout>
     )
 }
 

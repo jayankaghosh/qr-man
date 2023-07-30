@@ -3,13 +3,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {useTranslation} from "react-i18next";
 import Link from "components/link";
 import {STEP_SIGN_IN} from "pages/authenticate/config";
-
-const onSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    console.log(data);
-}
+import {FORM_TYPE_CREATE, onFormSubmit} from "util/authenticate";
 
 const SignUp = ({ setCurrentStep }) => {
     const { t } = useTranslation('common');
@@ -29,7 +23,7 @@ const SignUp = ({ setCurrentStep }) => {
             <Typography component="h1" variant="h5">
                 { t('authenticate.sign-up') }
             </Typography>
-            <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={e => onFormSubmit(e, FORM_TYPE_CREATE)} noValidate sx={{ mt: 1 }}>
                 <TextField
                     margin="normal"
                     required
