@@ -1,5 +1,6 @@
-import {AppBar, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, IconButton, Stack, Toolbar, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import QrCodeIcon from '@mui/icons-material/QrCode';
 import { useTranslation } from "react-i18next";
 import Menu from "components/menu";
 import {useState} from "react";
@@ -21,7 +22,10 @@ const Header = () => {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    { t('app.name') }
+                    <Stack direction="row" alignItems="center" gap={1}>
+                        <QrCodeIcon />
+                        <Typography variant="body1">{ t('app.name') }</Typography>
+                    </Stack>
                 </Typography>
                 <Menu menuState={menuState} setMenuState={setMenuState} />
             </Toolbar>

@@ -5,10 +5,20 @@
   "menu": {
     "my-buckets": "My Buckets",
     "profile": "My Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "set-light-mode": "Set Light Mode",
+    "set-dark-mode": "Set Dark Mode"
   },
   "bucket": {
-    "no-bucket-found": "No buckets found"
+    "no-bucket-found": "No buckets found",
+    "delete-title": "Are you sure you want to delete this bucket?",
+    "delete-description": "Once a bucket is deleted all the items inside the bucket are also automatically deleted. This action is permanent and cannot be undone",
+    "delete-successful": "Bucket deleted successfully",
+    "actions": {
+      "view": "View",
+      "delete": "Delete",
+      "qr-code": "QR Code"
+    }
   },
   "authenticate": {
     "sign-in": "Sign in",
@@ -26,5 +36,12 @@
     "heading": "404",
     "message": "The page you’re looking for doesn’t exist.",
     "home-button-text": "Take me back"
+  },
+  "bucket-qr-code": {
+    "download": "Download",
+    "share": "Share"
+  },
+  "bucket-details": {
+    "created-at": "Created At: {{date}}"
   }
 }

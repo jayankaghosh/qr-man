@@ -11,3 +11,11 @@ export const getMode = () => {
         return MODE_DARK;
     }
 }
+
+export const setMode = mode => {
+    if (mode !== MODE_LIGHT) {
+        mode = MODE_DARK;
+    }
+    setItem('appMode', mode);
+    window.location.reload();
+}

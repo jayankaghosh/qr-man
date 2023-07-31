@@ -2,16 +2,12 @@
 
 namespace QrMan\Api\Processor\Bucket;
 
-use chillerlan\QRCode\Output\QROutputInterface;
-use chillerlan\QRCode\QRCode;
-use chillerlan\QRCode\QROptions;
 use QrMan\Api\ApiInterface;
 use QrMan\Api\Response;
 use QrMan\Api\Util\Request;
 use QrMan\Api\Util\User;
 use QrMan\Exception\UnauthorizedException;
 use QrMan\Model\Bucket;
-use QrMan\Util\QrImageWithText;
 
 class GetByCode implements ApiInterface
 {

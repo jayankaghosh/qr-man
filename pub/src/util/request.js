@@ -3,7 +3,7 @@ import store from "util/store";
 
 export const API_PREFIX = (process.env.REACT_APP_API_URL_PREFIX || '/').replace(/^\/|\/$/g, '');
 
-export const sendRequest = (uri, method = 'GET', data = null, headers = {}) => {
+export const sendRequest = (uri, method = 'GET', data = null, headers = {}, getRawResponse = false) => {
     const globalHeaders = getGlobalHeaders();
     Object.keys(globalHeaders).forEach(header => {
         if (!headers[header]) {
@@ -19,12 +19,16 @@ export const sendRequest = (uri, method = 'GET', data = null, headers = {}) => {
             if (data) {
                 options.body = JSON.stringify(data);
             }
-            const response = await fetch(API_PREFIX + uri, options);
+            const response = await fetch('/' + API_PREFIX + uri, options);
             if (!response.ok) {
                 throw response;
             }
-            const responseBody = await response.json();
-            resolve(responseBody);
+            if (getRawResponse) {
+                resolve(response);
+            } else {
+                const responseBody = await response.json();
+                resolve(responseBody);
+            }
         } catch (e) {
             console.error(e);
             const { status, statusText} = e;

@@ -1,0 +1,13 @@
+.BucktQrCodePage {
+  align-items: center;
+  .container {
+    text-align: center;
+    margin-top: 4rem;
+    img {
+      width: 400px;
+      @media (max-width: 600px) {
+        width: 90%;
+      }
+    }
+  }
+}

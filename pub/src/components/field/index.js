@@ -41,6 +41,7 @@ const Field = (props) => {
     return (
         <TextField
             { ...props }
+            variant="standard"
             disabled={isDisabled}
             InputLabelProps={{ shrink: props.value }}
             onChange={e => setValue(e.target.value)}

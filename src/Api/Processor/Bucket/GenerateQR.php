@@ -54,14 +54,13 @@ class GenerateQR implements ApiInterface
     {
         $options = new QROptions([
             'version'     => 7,
-            'outputType'  => QROutputInterface::GDIMAGE_PNG,
+            'outputType'  => QROutputInterface::GDIMAGE_JPG,
             'scale'       => 5,
             'imageBase64' => false,
         ]);
         $qrCode = new QRCode($options);
         $qrCode->addByteSegment($data);
         $qrOutputInterface = new QrImageWithText($options, $qrCode->getQRMatrix());
-
         header('Content-type: image/png');
         echo $qrOutputInterface->dump(null, $subtext);
         exit(0);

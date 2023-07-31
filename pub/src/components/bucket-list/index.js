@@ -1,12 +1,45 @@
 import {useTranslation} from "react-i18next";
-import {Box, Card, Typography, CardContent, CardActions, Button, Divider} from "@mui/material";
+import { useNavigate } from 'react-router-dom';
+import {Box, Card, Typography, CardContent, CardActions, Button, Divider, Stack} from "@mui/material";
 import {sendRequest} from "util/request";
 import ItemList from "components/item-list";
 import {useDispatch} from "react-redux";
+import DataArrayIcon from '@mui/icons-material/DataArray';
+import DeleteIcon from '@mui/icons-material/Delete';
+import QrCodeIcon from '@mui/icons-material/QrCode';
+import {useState} from "react";
+import AlertDialog from "../alert-dialog";
 
-const Item = ({ data }) => {
+const Item = ({ data, refreshList }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { t } = useTranslation('common');
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const onDeleteDialogClose = async isDelete => {
+        if (isDelete) {
+            await sendRequest('/bucket/delete', 'POST', {bucket_id: data.id});
+            refreshList();
+            dispatch({
+                type: 'SHOW_NOTIFICATION',
+                message: t('bucket.delete-successful')
+            })
+        }
+    }
+    const DeleteConfirmDialog = () => {
+        if (!isDeleteDialogOpen) return null;
+        return (
+            <AlertDialog
+                isOpen={isDeleteDialogOpen}
+                setIsOpen={setIsDeleteDialogOpen}
+                title={t('bucket.delete-title')}
+                description={t('bucket.delete-description')}
+                onClose={onDeleteDialogClose}
+            />
+        )
+    }
     return (
         <>
+            <DeleteConfirmDialog />
             <Card>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
@@ -17,8 +50,24 @@ const Item = ({ data }) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Share</Button>
-                    <Button size="small">Learn More</Button>
+                    <Button size="small" onClick={() => navigate(`/bucket/${data.code}`)}>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                            <DataArrayIcon />
+                            <Typography variant="body1">{t('bucket.actions.view')}</Typography>
+                        </Stack>
+                    </Button>
+                    <Button size="small" onClick={() => setIsDeleteDialogOpen(true)}>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                            <DeleteIcon />
+                            <Typography variant="body1">{t('bucket.actions.delete')}</Typography>
+                        </Stack>
+                    </Button>
+                    <Button size="small" onClick={() => navigate(`/bucket/qrcode/${data.id}`)}>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                            <QrCodeIcon />
+                            <Typography variant="body1">{t('bucket.actions.qr-code')}</Typography>
+                        </Stack>
+                    </Button>
                 </CardActions>
             </Card>
             <Divider variant={'middle'} />

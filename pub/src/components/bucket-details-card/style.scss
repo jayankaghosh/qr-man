@@ -1,0 +1,15 @@
+.BucketDetailsCard {
+  .Heading {
+    .BucketName {
+      input {
+        font-size: 2rem;
+      }
+    }
+    .MuiCardHeader-subheader {
+      margin-top: 1rem;
+    }
+  }
+  .Description {
+    width: 100%;
+  }
+}
