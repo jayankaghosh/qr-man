@@ -1,21 +1,21 @@
 import {useTranslation} from "react-i18next";
 import {useNavigate, useParams} from 'react-router-dom';
-import {Box, Card, Typography, CardContent, CardActions, Button, Divider, Stack} from "@mui/material";
+import {Box, Card, Typography, CardContent, CardActions, Button, Divider, Stack, Fab} from "@mui/material";
 import {sendRequest} from "util/request";
 import ItemList from "components/item-list";
 import {useDispatch} from "react-redux";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useState} from "react";
 import AlertDialog from "../alert-dialog";
+import AddIcon from "@mui/icons-material/Add";
 
 const Item = ({ data, refreshList }) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { t } = useTranslation('common');
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const onDeleteDialogClose = async isDelete => {
         if (isDelete) {
-            await sendRequest('/bucket/delete', 'POST', {bucket_id: data.id});
+            await sendRequest('/bucket/item/delete', 'POST', {bucket_item_id: data.id});
             refreshList();
             dispatch({
                 type: 'SHOW_NOTIFICATION',
@@ -82,6 +82,7 @@ const NoItems = () => {
 
 const BucketItemsList = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {bucket_code} = useParams();
 
     const fetchItems = (
@@ -114,6 +115,19 @@ const BucketItemsList = () => {
         })();
     }
 
+    const AddButton = ({ onclick }) => {
+        const styles = {
+            position: 'fixed',
+            bottom: 30,
+            right: 30,
+        }
+        return (
+            <Fab color="primary" aria-label="add" sx={styles}>
+                <AddIcon onClick={onclick} />
+            </Fab>
+        )
+    }
+
     return (
         <div className={'BucketItemsList'}>
             <ItemList
@@ -121,6 +135,7 @@ const BucketItemsList = () => {
                 noItemsFoundComponent={NoItems}
                 itemRenderer={Item}
             />
+            <AddButton onclick={() => navigate(`/bucket/${bucket_code}/list/add`)} />
         </div>
     )
 }

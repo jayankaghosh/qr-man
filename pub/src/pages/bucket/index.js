@@ -23,7 +23,7 @@ const BucketPage = () => {
         <WithHeaderLayout>
             <div className={'BucketPage'}>
                 <BucketList />
-                <AddButton onclick={() => console.log(navigate('/bucket/add'))} />
+                <AddButton onclick={() => navigate('/bucket/add')} />
             </div>
         </WithHeaderLayout>
     )

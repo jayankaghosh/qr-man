@@ -4,6 +4,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import DataArrayIcon from '@mui/icons-material/DataArray';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 import { useTranslation } from "react-i18next";
 import {logout} from "util/authenticate";
 import {useNavigate} from "react-router-dom";
@@ -70,6 +71,14 @@ const MenuItems = ({setMenuState}) => {
                             <DataArrayIcon />
                         </ListItemIcon>
                         <ListItemText primary={t('menu.my-buckets')} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton onClick={() => navigate('/scan')}>
+                        <ListItemIcon>
+                            <QrCodeScannerIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={t('menu.scan')} />
                     </ListItemButton>
                 </ListItem>
                 <ToggleDarkMode />

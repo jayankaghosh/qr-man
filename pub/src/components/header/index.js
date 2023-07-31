@@ -9,7 +9,7 @@ const Header = () => {
     const { t } = useTranslation('common');
     const [menuState, setMenuState] = useState(false);
     return (
-        <AppBar position="static">
+        <AppBar position="sticky">
             <Toolbar>
                 <IconButton
                     size="large"
