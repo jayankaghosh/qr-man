@@ -43,5 +43,20 @@
   },
   "bucket-details": {
     "created-at": "Created At: {{date}}"
+  },
+  "bucket-add": {
+    "title": "Add New Bucket",
+    "fields": {
+      "name": "Bucket Name",
+      "description": "Bucket Description"
+    }
+  },
+  "bucket-items": {
+    "no-bucket-items-found": "No Items Found",
+    "delete-title": "Are you sure you want to delete this item?",
+    "delete-description": "This action is permanent and cannot be undone",
+    "actions": {
+      "delete": "Delete"
+    }
   }
 }

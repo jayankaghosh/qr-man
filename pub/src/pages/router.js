@@ -5,9 +5,11 @@ import MyProfile from 'pages/my-profile';
 import AuthenticatePage from "pages/authenticate";
 import NoRoutePage from 'pages/no-route';
 import BucketDetails from "pages/bucket-details";
+import BucketAdd from "pages/bucket-add";
 
 export const routes = [
     <Route path="/" Component={BucketPage} key='bucket-page' />,
+    <Route path="/bucket/add" Component={BucketAdd} key='bucket-add-page' />,
     <Route path="/bucket/:bucket_code" Component={BucketDetails} key='bucket-details-page' />,
     <Route path="/bucket/qrcode/:bucket_id" Component={BucketQrCode} key='bucket-qr-code' />,
     <Route path="/profile" Component={MyProfile} key='my-profile' />,

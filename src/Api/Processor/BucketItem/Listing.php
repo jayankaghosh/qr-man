@@ -28,8 +28,8 @@ class Listing implements ApiInterface
     public function process(array $request, Response $response): Response
     {
         $user = $this->userUtil->getLoggedInUser();
-        $this->requestUtil->validateRequiredFields($_GET, ['bucket_id']);
-        $bucket = $this->bucketModel->load($_GET['bucket_id']);
+        $this->requestUtil->validateRequiredFields($_GET, ['bucket_code']);
+        $bucket = $this->bucketModel->load($_GET['bucket_code'], 'code');
         $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'))['items'];
         $allowedBucketIds = array_column($allowedBuckets, 'id');
         if (!in_array($bucket->getData('id'), $allowedBucketIds)) {

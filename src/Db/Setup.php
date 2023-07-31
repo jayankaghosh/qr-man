@@ -49,6 +49,7 @@ class Setup
                 $affectedTables = array_merge($affectedTables, $this->getAffectedTables($baseExpr));
             }
         }
+        $affectedTables = array_merge($affectedTables, array_column($result['DESCRIBE'] ?? [], 'table'));
         return array_unique($affectedTables);
     }
 }
