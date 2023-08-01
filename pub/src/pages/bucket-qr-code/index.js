@@ -7,7 +7,7 @@ import {sendRequest} from "util/request";
 import {useDispatch} from "react-redux";
 import WithHeaderLayout from "../../layouts/with-header";
 import {useTranslation} from "react-i18next";
-import {canShare, shareBlob} from 'util/share';
+import {canShareBlob, shareBlob} from 'util/share';
 import './style.scss'
 
 const saveFile = (url, filename) => {
@@ -51,7 +51,7 @@ const BucketQrCode = () => {
     }, []);
 
     const ShareButton = () => {
-        if (!canShare()) return null;
+        if (!canShareBlob(qrCodeBlob)) return null;
         return (
             <Button size="small" onClick={() => shareBlob(qrCodeBlob, 'QRMan Bucket QR Code')}>
                 <Stack direction="row" alignItems="center" gap={1}>
