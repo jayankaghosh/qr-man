@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# 1. Redirect /api/rest/* requests to index.php
+RewriteRule ^api/rest/ index.php [L]
+
+# 2. Redirect .js, .css, .png, and .jpg requests to pub/build
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule \.(js|css|png|jpg)$ pub/build%{REQUEST_URI} [L]
+
+# 3. Redirect the root URL to pub/build/index.html
+RewriteRule ^$ pub/build/index.html [L]
+
+# 4. Redirect all other requests to pub/build/index.html
+RewriteCond %{REQUEST_URI} !^/pub/build/ [NC]
+RewriteRule ^ pub/build/index.html [L]
