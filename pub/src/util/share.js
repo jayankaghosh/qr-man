@@ -18,11 +18,10 @@ export const canShareBlob = (blob) => {
 }
 
 export const shareBlob = async (blob, filename) => {
-
-    const data = {
-        files: [blobToFile(blob, filename)]
-    };
-    if (canShareBlob(data)) {
+    if (canShareBlob(blob)) {
+        const data = {
+            files: [blobToFile(blob, filename)]
+        };
         await navigator.share(data);
     }
 }
