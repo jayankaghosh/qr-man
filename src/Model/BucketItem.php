@@ -7,8 +7,8 @@ use QrMan\Db\Connector;
 class BucketItem extends AbstractModel
 {
 
-    const TYPE_TEXT = 0;
     const TYPE_IMAGE = 1;
+    const TYPE_TEXT = 2;
 
     protected function getTableName(): string
     {

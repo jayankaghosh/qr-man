@@ -19,7 +19,7 @@ const Item = ({ data, refreshList }) => {
             refreshList();
             dispatch({
                 type: 'SHOW_NOTIFICATION',
-                message: t('bucket.delete-successful')
+                message: t('bucket-items.delete-successful')
             })
         }
     }

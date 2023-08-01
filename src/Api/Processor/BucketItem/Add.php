@@ -31,12 +31,12 @@ class Add implements ApiInterface
     {
         $user = $this->userUtil->getLoggedInUser();
         $this->requestUtil->validateRequiredFields($request, [
-            'bucket_id',
+            'bucket_code',
             'name',
             'type',
             'value'
         ]);
-        $bucket = $this->bucketModel->load($request['bucket_id']);
+        $bucket = $this->bucketModel->load($request['bucket_code'], 'code');
         $allowedBuckets = $this->bucketModel->getBucketsByUserId($user->getData('id'))['items'];
         $allowedBucketIds = array_column($allowedBuckets, 'id');
         if (!in_array($bucket->getData('id'), $allowedBucketIds)) {

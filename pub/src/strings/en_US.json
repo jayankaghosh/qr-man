@@ -59,8 +59,19 @@
     "no-bucket-items-found": "No Items Found",
     "delete-title": "Are you sure you want to delete this item?",
     "delete-description": "This action is permanent and cannot be undone",
+    "delete-successful": "Bucket item deleted successfully",
     "actions": {
       "delete": "Delete"
+    }
+  },
+  "bucket-item-add": {
+    "title": "Add bucket item",
+    "fields": {
+      "name": "Item Name",
+      "value": "Item Value"
+    },
+    "actions": {
+      "add": "Add Bucket Item"
     }
   }
 }
