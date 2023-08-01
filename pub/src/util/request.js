@@ -3,7 +3,14 @@ import store from "util/store";
 
 export const API_PREFIX = (process.env.REACT_APP_API_URL_PREFIX || '/').replace(/^\/|\/$/g, '');
 
-export const sendRequest = (uri, method = 'GET', data = null, headers = {}, getRawResponse = false) => {
+export const sendRequest = (
+    uri,
+    method = 'GET',
+    data = null,
+    headers = {},
+    getRawResponse = false,
+    isHandleRequestError = true
+) => {
     const globalHeaders = getGlobalHeaders();
     Object.keys(globalHeaders).forEach(header => {
         if (!headers[header]) {
@@ -19,7 +26,13 @@ export const sendRequest = (uri, method = 'GET', data = null, headers = {}, getR
             if (data) {
                 options.body = JSON.stringify(data);
             }
-            const response = await fetch('/' + API_PREFIX + uri, options);
+            let url;
+            if (uri[0] === '/') {
+                url = '/' + API_PREFIX + uri;
+            } else {
+                url = uri;
+            }
+            const response = await fetch(url, options);
             if (!response.ok) {
                 throw response;
             }
@@ -46,7 +59,9 @@ export const sendRequest = (uri, method = 'GET', data = null, headers = {}, getR
                 statusText,
                 errorMessage: responseBody.error || ''
             }
-            handleRequestError(error);
+            if (isHandleRequestError) {
+                handleRequestError(error);
+            }
             reject(error);
         }
     });

@@ -63,7 +63,7 @@ const BucketAdd = () => {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            {t('authenticate.sign-in')}
+                            {t('bucket-add.actions.add')}
                         </Button>
                     </Box>
                 </Box>

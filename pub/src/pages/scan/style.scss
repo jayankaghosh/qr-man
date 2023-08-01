@@ -1,0 +1,9 @@
+.ScanPage {
+  #qr-code-scanner {
+    margin: 10vh auto auto;
+    width: 400px;
+    @media (max-width: 600px) {
+      width: 90%;
+    }
+  }
+}

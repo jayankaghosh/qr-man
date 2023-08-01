@@ -50,6 +50,9 @@
     "fields": {
       "name": "Bucket Name",
       "description": "Bucket Description"
+    },
+    "actions": {
+      "add": "Add"
     }
   },
   "bucket-items": {
