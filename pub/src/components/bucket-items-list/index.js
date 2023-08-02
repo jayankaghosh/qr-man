@@ -6,7 +6,7 @@ import ItemList from "components/item-list";
 import {useDispatch} from "react-redux";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useState} from "react";
-import AlertDialog from "../alert-dialog";
+import AlertDialog from "components/alert-dialog";
 import AddIcon from "@mui/icons-material/Add";
 
 const Item = ({ data, refreshList }) => {

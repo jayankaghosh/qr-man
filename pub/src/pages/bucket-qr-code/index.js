@@ -5,22 +5,12 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {sendRequest} from "util/request";
 import {useDispatch} from "react-redux";
-import WithHeaderLayout from "../../layouts/with-header";
+import WithHeaderLayout from "layouts/with-header";
 import {useTranslation} from "react-i18next";
 import {canShareBlob, shareBlob} from 'util/share';
-import './style.scss'
+import {saveFile} from "util/file";
 
-const saveFile = (url, filename) => {
-    const a = document.createElement('a');
-    document.body.appendChild(a);
-    a.href = url;
-    a.download = filename;
-    a.click();
-    setTimeout(() => {
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-    }, 0)
-}
+import './style.scss'
 
 const BucketQrCode = () => {
     const {t} = useTranslation('common');

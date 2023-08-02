@@ -11,7 +11,8 @@
         "greenlion/php-sql-parser": "dev-master",
         "ext-gd": "*",
         "symfony/translation": "6.4.x-dev",
-        "symfony/console": "6.4.x-dev"
+        "symfony/console": "6.4.x-dev",
+        "dompdf/dompdf": "dev-master"
     },
     "minimum-stability": "dev",
     "authors": [
@@ -24,5 +25,8 @@
         "psr-4": {
             "QrMan\\": "src/"
         }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "6.4.x-dev"
     }
 }

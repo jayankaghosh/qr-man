@@ -2,16 +2,13 @@
 
 namespace QrMan\Api\Processor\Bucket;
 
-use chillerlan\QRCode\Output\QROutputInterface;
-use chillerlan\QRCode\QRCode;
-use chillerlan\QRCode\QROptions;
 use QrMan\Api\ApiInterface;
 use QrMan\Api\Response;
+use QrMan\Api\Util\QrCode;
 use QrMan\Api\Util\Request;
 use QrMan\Api\Util\User;
 use QrMan\Exception\UnauthorizedException;
 use QrMan\Model\Bucket;
-use QrMan\Util\QrImageWithText;
 
 class GenerateQR implements ApiInterface
 {
@@ -19,7 +16,8 @@ class GenerateQR implements ApiInterface
     public function __construct(
         private readonly User $userUtil,
         private readonly Bucket $bucketModel,
-        private readonly Request $requestUtil
+        private readonly Request $requestUtil,
+        private readonly QrCode $qrCodeUtil
     )
     {
     }
@@ -37,32 +35,9 @@ class GenerateQR implements ApiInterface
         if (!in_array($bucket->getData('id'), $allowedBucketIds)) {
             throw new UnauthorizedException(__('Bucket does not belong to you'));
         }
-        $this->generateRawQRImage(
-            $bucket->getData('code'),
-            $bucket->getData('owner_id') . '/' . $bucket->getData('id') . '/' . $bucket->getData('name')
-        );
-    }
-
-    /**
-     * @param $data
-     * @return void
-     * @throws \chillerlan\QRCode\Data\QRCodeDataException
-     * @throws \chillerlan\QRCode\Output\QRCodeOutputException
-     * @throws \ErrorException
-     */
-    protected function generateRawQRImage(string $data, string $subtext): void
-    {
-        $options = new QROptions([
-            'version'     => 7,
-            'outputType'  => QROutputInterface::GDIMAGE_JPG,
-            'scale'       => 5,
-            'imageBase64' => false,
-        ]);
-        $qrCode = new QRCode($options);
-        $qrCode->addByteSegment($data);
-        $qrOutputInterface = new QrImageWithText($options, $qrCode->getQRMatrix());
+        $data = $this->qrCodeUtil->generateRawQRImage($bucket);
         header('Content-type: image/png');
-        echo $qrOutputInterface->dump(null, $subtext);
+        echo $data;
         exit(0);
     }
 }

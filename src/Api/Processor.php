@@ -7,7 +7,7 @@ use QrMan\Api\Processor\ErrorHandler;
 use QrMan\Exception\MalformedDataException;
 use QrMan\Exception\NotFoundException;
 
-class Processor
+class Processor implements ResponseInterface
 {
 
     public function __construct(
@@ -34,7 +34,10 @@ class Processor
                 throw new NotFoundException(__('Processor not found'));
             }
             $processor = ObjectManager::getInstance()->get($processor);
-            if ($processor instanceof ApiInterface) {
+            if ($processor instanceof ResponseInterface) {
+                $processor->process($uri, $method);
+                return;
+            } elseif ($processor instanceof ApiInterface) {
                 $response = $processor->process($this->getPostData($method), $response);
             }
             $this->processResponse($response);

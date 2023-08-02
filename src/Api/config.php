@@ -52,6 +52,11 @@ return [
         'processor' => \QrMan\Api\Processor\Bucket\GetByCode::class
     ],
     [
+        'uri' => '/bucket/printAllQr',
+        'method' => 'GET',
+        'processor' => \QrMan\Api\Processor\Bucket\PrintAllQr::class
+    ],
+    [
         'uri' => '/bucket/item/list',
         'method' => 'GET',
         'processor' => \QrMan\Api\Processor\BucketItem\Listing::class

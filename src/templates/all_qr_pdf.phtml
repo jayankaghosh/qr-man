@@ -1,0 +1,33 @@
+<style>
+    .container {
+        width: 100%;
+    }
+    .items {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Optional: Adjust the spacing between items */
+    }
+
+    .item {
+        display: inline-block;
+        flex-basis: 19%; /* Set the width to fit 5 items in a row (100% / 5 = 20%, leaving 1% for spacing) */
+        margin-bottom: 10px; /* Optional: Add some spacing between rows */
+        /* Adjust any other styles for the items as needed */
+    }
+
+    .item img {
+        /*width: 100%; !* Optional: Ensure the images fill the entire item width *!*/
+        width: 150px;
+        height: auto;
+    }
+</style>
+<div class="container">
+    <div class="items">
+        <?php foreach ($this->getData('qr_codes') as $qrCode): ?>
+            <div class="item">
+                <img src="<?= $qrCode ?>" />
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>

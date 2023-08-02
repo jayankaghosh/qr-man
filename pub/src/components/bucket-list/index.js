@@ -8,7 +8,7 @@ import DataArrayIcon from '@mui/icons-material/DataArray';
 import DeleteIcon from '@mui/icons-material/Delete';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import {useState} from "react";
-import AlertDialog from "../alert-dialog";
+import AlertDialog from "components/alert-dialog";
 
 const Item = ({ data, refreshList }) => {
     const dispatch = useDispatch();

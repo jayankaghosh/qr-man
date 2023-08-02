@@ -5,10 +5,12 @@ import DataArrayIcon from '@mui/icons-material/DataArray';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { useTranslation } from "react-i18next";
 import {logout} from "util/authenticate";
 import {useNavigate} from "react-router-dom";
 import {getMode, MODE_DARK, MODE_LIGHT, setMode} from 'util/mode';
+import {exportAllBucketQrs} from "util/bucket-qr-code";
 
 const ToggleDarkMode = () => {
     let mode = getMode();
@@ -79,6 +81,14 @@ const MenuItems = ({setMenuState}) => {
                             <QrCodeScannerIcon />
                         </ListItemIcon>
                         <ListItemText primary={t('menu.scan')} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton onClick={exportAllBucketQrs}>
+                        <ListItemIcon>
+                            <FileDownloadIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={t('menu.export-all-buckets')} />
                     </ListItemButton>
                 </ListItem>
                 <ToggleDarkMode />

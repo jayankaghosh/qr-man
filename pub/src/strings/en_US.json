@@ -8,7 +8,8 @@
     "logout": "Logout",
     "set-light-mode": "Set Light Mode",
     "set-dark-mode": "Set Dark Mode",
-    "scan": "Scan"
+    "scan": "Scan",
+    "export-all-buckets": "Export All Buckets"
   },
   "bucket": {
     "no-bucket-found": "No buckets found",
