@@ -9,11 +9,11 @@ export const exportAllBucketQrs = async () => {
     if (!extension) {
         extension = '';
     }
-    const filename = `bucket-qr-codes.${extension}`;
+    const filename = `bucket-qr-codes`;
     const objectUrl = URL.createObjectURL(blob);
     if (canShareBlob(blob)) {
         await shareBlob(blob, filename);
     } else {
-        await saveFile(objectUrl, filename);
+        await saveFile(objectUrl, `${filename}.${extension}`);
     }
 }
